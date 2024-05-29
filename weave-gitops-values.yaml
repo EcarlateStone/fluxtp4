@@ -1,4 +1,4 @@
-adminUser
+adminUser:
  create: true
  username: admin
  passwordHash: $2y$10$dY/wf6lsBF9xK.TGaDyyduvqAPm.LaTuqV96MbEki9PMmXBeCheTG
