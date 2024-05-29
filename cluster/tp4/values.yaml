@@ -1,4 +1,3 @@
-
 ## Official nextcloud image version
 ## ref: https://hub.docker.com/r/library/nextcloud/tags/
 ##
@@ -256,6 +255,30 @@ internalDatabase:
 externalDatabase:
   enabled: false
 
+  ## Supported database engines: mysql or postgresql
+  type: mysql
+
+  ## Database host
+  host:
+
+  ## Database user
+  user: nextcloud
+
+  ## Database password
+  password: ""
+
+  ## Database name
+  database: nextcloud
+
+  ## Use a existing secret
+  existingSecret:
+    enabled: false
+    # secretName: nameofsecret
+    usernameKey: db-username
+    passwordKey: db-password
+    # hostKey: db-hostname-or-ip
+    # databaseKey: db-name
+
 ##
 ## MariaDB chart configuration
 ## ref: https://github.com/bitnami/charts/tree/main/bitnami/mariadb
@@ -324,13 +347,14 @@ postgresql:
 ##
 
 redis:
- enabled: true
- master:
- persistence:
   enabled: false
- replica:
-  persistence:
-   enabled: false
+  auth:
+    enabled: true
+    password: 'changeme'
+    # name of an existing secret with Redis® credentials (instead of auth.password), must be created ahead of time
+    existingSecret: ""
+    # Password key to be retrieved from existing secret
+    existingSecretPasswordKey: ""
 
 
 ## Cronjob to execute Nextcloud background tasks
